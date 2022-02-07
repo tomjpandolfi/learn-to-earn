@@ -1,4 +1,5 @@
 import { useContext, useState } from "react"
+import Countdown from "react-countdown"
 import BodyText from "../../components/BodyText/BodyText"
 import Button from "../../components/Button/Button"
 import ModalContainer from "../../components/ModalContainer/ModalContainer"
@@ -7,9 +8,29 @@ import { WalletContext } from "../../context/wallet"
 import walletOptions from "../../helpers/connectWallet"
 import "./ConnectWalletPage.scss"
 
+const renderLaunchCountdown = (props: {
+  hours: any
+  minutes: any
+  seconds: any
+  days: any
+}) => {
+  console.log()
+  return (
+    <div className="launch-countdown">
+      <div>
+        <BodyText>
+          {props.hours} hours {props.minutes} mins {props.seconds} secs
+        </BodyText>
+      </div>
+    </div>
+  )
+}
+
 const ConnectWalletPage = () => {
   const { connectWallet } = useContext(WalletContext)
   const [isWalletSelectVisible, setIsWalletSelectVisible] = useState<boolean>()
+
+  const hasAppOpened = new Date().valueOf() > 1644283443002
 
   return (
     <div className="connect-wallet-page">
@@ -38,11 +59,21 @@ const ConnectWalletPage = () => {
         Complete this quiz to verify your knowledge of the Honey protocol and
         attempt to earn a whitelist spot for our upcoming mint
       </BodyText>
-      <Button
-        title="Connect wallet"
-        onClick={() => setIsWalletSelectVisible(true)}
-        className="connect-wallet-button"
-      />
+      {!hasAppOpened ? (
+        <div className="countdown">
+          <BodyText>Opens in </BodyText>
+          <Countdown
+            date={new Date(1644283443002)}
+            renderer={renderLaunchCountdown}
+          />
+        </div>
+      ) : (
+        <Button
+          title="Connect wallet"
+          onClick={() => setIsWalletSelectVisible(true)}
+          className="connect-wallet-button"
+        />
+      )}
       <div className="bottom-note">
         <BodyText>
           Still need to study? Check out our{" "}
