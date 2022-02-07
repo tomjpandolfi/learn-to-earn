@@ -1,0 +1,41 @@
+@import "../../sass/variables.scss";
+@import "../../sass/global.scss";
+
+.connect-wallet-page {
+  background: $body-background;
+  text-align: center;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  padding: 5%;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+
+  .title-text {
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+
+  .primary-button {
+    margin-top: 30px;
+  }
+
+  .body-text {
+    font-size: 17px;
+    max-width: 850px;
+  }
+
+  .bottom-note {
+    position: absolute;
+    bottom: 35px;
+
+    .body-text {
+      a {
+        @include gradient-text();
+        // text-decoration: underline;
+      }
+    }
+  }
+}

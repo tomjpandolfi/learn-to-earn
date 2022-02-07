@@ -1,0 +1,72 @@
+@import "../../sass/variables.scss";
+@import "../../sass/global.scss";
+
+.quiz-page {
+  padding: 5%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .content {
+    background: $primary-color;
+    border-radius: 15px;
+    padding: 5%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+
+    .question {
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+
+    .answers-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 30px;
+
+      .answer {
+        padding: 17px;
+        border-radius: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.432);
+        text-align: left;
+        cursor: pointer;
+
+        &.selected {
+          border: 1px solid #e88742;
+        }
+      }
+    }
+
+    .next-btn,
+    .submit-btn {
+      margin-left: auto;
+      margin-top: 20px;
+      transition: all 0.5s;
+      padding: 15px 35px;
+
+      &:hover {
+        transform: scale(1.03);
+      }
+    }
+
+    .next-btn {
+      background: $body-background;
+
+      p {
+        color: rgba(255, 255, 255, 0.589);
+      }
+
+      &:hover {
+        p {
+          @include gradient-text();
+        }
+      }
+    }
+
+    .submit-btn {
+    }
+  }
+}
