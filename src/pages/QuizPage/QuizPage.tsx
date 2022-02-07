@@ -7,6 +7,8 @@ import { QUESTIONS } from "./questions"
 import "./QuizPage.scss"
 import Confetti from "react-confetti"
 import { WalletContext } from "../../context/wallet"
+import { addDoc, collection, getFirestore, serverTimestamp } from "firebase/firestore";
+
 
 type Answer = {
   answer: string
@@ -30,6 +32,7 @@ const QuizPage = () => {
   const [answers, setAnswers] = useState<Answer[]>([])
   const [submitted, setSubmitted] = useState(false)
   const { walletAddress } = useContext(WalletContext)
+  const db = getFirestore();
 
   const onNextClick = () => {
     setQuestionIndex((current) => current + 1)
@@ -45,7 +48,14 @@ const QuizPage = () => {
 
   const addAddressToWhiteList = useCallback(async () => {
     try {
-    } catch (error) {}
+      const docRef = await addDoc(collection(db, "publickeys"), {
+        pubkey: walletAddress,
+        timestamp: serverTimestamp()
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
   }, [])
 
   useEffect(() => {
@@ -83,9 +93,8 @@ const QuizPage = () => {
               {questions[questionIndex].answers.map((answer, i) => (
                 <div
                   onClick={() => setSelectedAnswer(answer)}
-                  className={`answer ${
-                    selectedAnswer?.answer === answer.answer ? "selected" : ""
-                  }`}
+                  className={`answer ${selectedAnswer?.answer === answer.answer ? "selected" : ""
+                    }`}
                 >
                   <BodyText>{answer.answer}</BodyText>
                 </div>
