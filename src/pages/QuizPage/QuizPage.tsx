@@ -1,10 +1,12 @@
-import { useMemo, useState } from "react"
+import { useCallback, useContext, useEffect, useMemo, useState } from "react"
 import BodyText from "../../components/BodyText/BodyText"
 import Button from "../../components/Button/Button"
 import TitleText from "../../components/TitleText/TitleText"
 import shuffleArray from "../../helpers/shuffleArray"
 import { QUESTIONS } from "./questions"
 import "./QuizPage.scss"
+import Confetti from "react-confetti"
+import { WalletContext } from "../../context/wallet"
 
 type Answer = {
   answer: string
@@ -27,6 +29,7 @@ const QuizPage = () => {
   const questions: Question[] = useMemo(() => shuffleArray(QUESTIONS), [])
   const [answers, setAnswers] = useState<Answer[]>([])
   const [submitted, setSubmitted] = useState(false)
+  const { walletAddress } = useContext(WalletContext)
 
   const onNextClick = () => {
     setQuestionIndex((current) => current + 1)
@@ -40,15 +43,31 @@ const QuizPage = () => {
 
   const score = answers.filter((answer) => answer.isCorrect).length
 
+  const addAddressToWhiteList = useCallback(async () => {
+    try {
+    } catch (error) {}
+  }, [])
+
+  useEffect(() => {
+    if (submitted && score > questions.length / 2) {
+      addAddressToWhiteList()
+    }
+  }, [submitted, addAddressToWhiteList, score, questions.length])
+
   return (
     <div className="quiz-page">
       <div className="content">
         {submitted ? (
           <>
-            <TitleText>Score</TitleText>
-            <TitleText>
-              {score}/{questions.length}
-            </TitleText>
+            {score > questions.length / 2 && (
+              <Confetti width={window.innerWidth} height={window.innerHeight} />
+            )}
+            <TitleText className="head-text">Score</TitleText>
+            <div className="score-container">
+              <TitleText>
+                {score}/{questions.length}
+              </TitleText>
+            </div>
             <BodyText>
               {score > questions.length / 2
                 ? "Congrats! You've been added to the whitelist."

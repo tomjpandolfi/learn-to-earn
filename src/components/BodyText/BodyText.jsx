@@ -1,11 +1,12 @@
-import React from 'react';
-import './BodyText.scss';
+import React from "react"
+import "./BodyText.scss"
 
-const BodyText = props =>{
-  const {light, className} = props;
-  
-  return(
-    <p className = {`
+const BodyText = (props) => {
+  const { light, className } = props
+
+  return (
+    <p
+      className={`
         ${light ? "body-text-light" : "body-text"}
         ${className ? className : ""}
       `}
@@ -15,4 +16,4 @@ const BodyText = props =>{
   )
 }
 
-export default BodyText;
+export default BodyText

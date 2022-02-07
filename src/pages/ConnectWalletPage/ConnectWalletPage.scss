@@ -38,4 +38,60 @@
       }
     }
   }
+
+  .wallet-options-modal {
+    .modal-content {
+      padding: 20px 20px 30px;
+      width: 300px;
+    }
+
+    .wallet-options-container {
+      width: 100%;
+
+      .title-text {
+        margin-bottom: 10px;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 24px;
+        line-height: 30px;
+      }
+
+      .line {
+        margin-bottom: 20px;
+        background-color: $dark-brown;
+        height: 1px;
+        opacity: 0.3;
+      }
+
+      .wallet-option {
+        background: $body-background;
+        margin-bottom: 25px;
+        cursor: pointer;
+        border-radius: 7px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        border: 0.5px solid #df892600;
+        transition: all 0.3s;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .body-text {
+          font-size: 17px;
+        }
+
+        img {
+          height: 30px;
+          width: auto;
+        }
+
+        &:hover {
+          border: 1px solid #df8a26;
+        }
+      }
+    }
+  }
 }

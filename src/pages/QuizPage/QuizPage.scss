@@ -14,8 +14,30 @@
     padding: 5%;
     text-align: center;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
     width: 80%;
+    min-height: 400px;
+
+    .head-text {
+      color: $gradient;
+      font-size: 30px;
+      margin: 30px;
+    }
+
+    .score-container {
+      background: $body-background;
+      border-radius: 50%;
+      border: 1px solid $gradient;
+      height: 90px;
+      width: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
 
     .question {
       margin-bottom: 30px;
@@ -64,9 +86,6 @@
           @include gradient-text();
         }
       }
-    }
-
-    .submit-btn {
     }
   }
 }

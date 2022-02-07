@@ -5,16 +5,16 @@ export const QUESTIONS: Question[] = [
     question: "What is a liquidation?",
     answers: [
       {
-        answer: "The protocol selling your collateral to pay back lenders",
-        isCorrect: true,
-      },
-      {
         answer: "Paying down your debt when it becomes undercollateralized",
         isCorrect: false,
       },
       {
         answer: "Adding liquidity to a pool",
         isCorrect: false,
+      },
+      {
+        answer: "The protocol selling your collateral to pay back lenders",
+        isCorrect: true,
       },
       {
         answer: "The lender withdrawing their supplied assets",
@@ -50,12 +50,12 @@ export const QUESTIONS: Question[] = [
     question: "What can $HONEY give you access too?",
     answers: [
       {
-        answer: "$veHONEY, by locking up tokens for a period of time",
-        isCorrect: true,
-      },
-      {
         answer: "Governance",
         isCorrect: false,
+      },
+      {
+        answer: "$veHONEY, by locking up tokens for a period of time",
+        isCorrect: true,
       },
       {
         answer:
@@ -72,11 +72,6 @@ export const QUESTIONS: Question[] = [
     question: "What is the point of vesting $HONEY into $veHONEY ?",
     answers: [
       {
-        answer:
-          "To own more votes in the DAO the longer you lock up your tokens",
-        isCorrect: true,
-      },
-      {
         answer: "To avoid exposure to the $HONEY token",
         isCorrect: false,
       },
@@ -87,6 +82,11 @@ export const QUESTIONS: Question[] = [
       {
         answer: "To pay less fees in the protocol",
         isCorrect: false,
+      },
+      {
+        answer:
+          "To own more votes in the DAO the longer you lock up your tokens",
+        isCorrect: true,
       },
     ],
   },
