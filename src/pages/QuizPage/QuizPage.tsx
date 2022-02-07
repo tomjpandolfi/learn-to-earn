@@ -80,7 +80,7 @@ const QuizPage = () => {
             </div>
             <BodyText>
               {score > questions.length / 2
-                ? "Congrats! You've been added to the whitelist."
+                ? "Congrats you passed the quiz ! The first 50 respondents will receive whitelist 🤞 Results in 2 hours "
                 : "Sorry! You do not qualify for the whitelist"}
             </BodyText>
           </>

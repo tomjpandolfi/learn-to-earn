@@ -59,7 +59,7 @@ const ConnectWalletPage = () => {
         Complete this quiz to verify your knowledge of the Honey protocol and
         attempt to earn a whitelist spot for our upcoming mint
       </BodyText>
-      {!hasAppOpened ? (
+      { false ? (
         <div className="countdown">
           <BodyText>Opens in </BodyText>
           <Countdown
