@@ -57,13 +57,14 @@ const ConnectWalletPage = () => {
       <TitleText>Honey Finance Whitelist</TitleText>
       <BodyText>
         Complete this quiz to verify your knowledge of the Honey protocol and
-        attempt to earn a whitelist spot for our upcoming mint
+        attempt to earn a whitelist spot. The first round of spots have already been won.
+         Keep an eye on our discord for the next one 👀
       </BodyText>
-      { false ? (
+      {!hasAppOpened ? (
         <div className="countdown">
           <BodyText>Opens in </BodyText>
           <Countdown
-            date={new Date(1644283443002)}
+            date={new Date(1644316207)}
             renderer={renderLaunchCountdown}
           />
         </div>
@@ -76,7 +77,7 @@ const ConnectWalletPage = () => {
       )}
       <div className="bottom-note">
         <BodyText>
-          Still need to study? Check out our{" "}
+          Still need to study? Check out our{" "} 📚
           <a
             href="https://docs.honey.finance/"
             rel="noreferrer"
