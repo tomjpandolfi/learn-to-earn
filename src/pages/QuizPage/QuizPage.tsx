@@ -74,10 +74,7 @@ const QuizPage: React.FC<{
     if (currentCollection) {
       onSnapshot(doc(db, "collections", currentCollection.id), (doc) => {
         console.log("NEW DATA", doc.data());
-        setCurrentData((currentData) => [
-          ...currentData,
-          doc.data()!.publicKeys,
-        ]);
+        setCurrentData(doc.data()!.publicKeys);
       });
     }
   }, [currentCollection]);
