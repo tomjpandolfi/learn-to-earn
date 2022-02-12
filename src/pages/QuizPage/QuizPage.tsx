@@ -7,19 +7,7 @@ import { QUESTIONS } from "./questions";
 import "./QuizPage.scss";
 import Confetti from "react-confetti";
 import { WalletContext } from "../../context/wallet";
-import {
-  collection,
-  doc,
-  DocumentData,
-  getDocs,
-  onSnapshot,
-  onSnapshotsInSync,
-  query,
-  QueryDocumentSnapshot,
-  setDoc,
-  updateDoc,
-  where,
-} from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { db } from "../..";
 
 type Answer = {
@@ -49,36 +37,8 @@ const QuizPage: React.FC<{
   const questions: Question[] = useMemo(() => shuffleArray(QUESTIONS), []);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [submitted, setSubmitted] = useState(false);
-  const [currentData, setCurrentData] = useState<DocumentData[]>([]);
+
   const { walletAddress } = useContext(WalletContext);
-
-  const [currentCollection, setCurrentCollection] =
-    useState<QueryDocumentSnapshot<DocumentData> | null>(null);
-
-  useEffect(() => {
-    (async function () {
-      const { docs } = await getDocs(
-        query(
-          collection(db, "collections"),
-          where(
-            "collectionCode",
-            "==",
-            nftCollection.collectionCode.toUpperCase()
-          )
-        )
-      );
-      setCurrentCollection(docs.length > 0 ? docs[0] : null);
-    })();
-  }, []);
-
-  useEffect(() => {
-    if (currentCollection) {
-      onSnapshot(doc(db, "collections", currentCollection.id), (doc) => {
-        console.log("NEW DATA", doc.data());
-        setCurrentData(doc.data()!.publicKeys);
-      });
-    }
-  }, [currentCollection]);
 
   const onNextClick = () => {
     setQuestionIndex((current) => current + 1);
@@ -94,20 +54,22 @@ const QuizPage: React.FC<{
 
   const addAddressToWhiteList = useCallback(async () => {
     try {
-      if (currentCollection) {
-        console.log(currentData);
-        await updateDoc(
-          doc(db, "collections", currentCollection!.id),
-          "publicKeys",
-          [...currentData, { address: walletAddress, timestamp: Date.now() }]
-        );
-      } else {
-        alert("Invalid Collection. Please refresh");
-      }
+      await addDoc(
+        collection(
+          db,
+          "collections",
+          nftCollection.collectionCode.toUpperCase(),
+          "publicKeys"
+        ),
+        {
+          address: walletAddress,
+          timeStamp: Date.now(),
+        }
+      );
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-  }, [currentCollection, currentData]);
+  }, []);
 
   useEffect(() => {
     if (submitted && score > questions.length / 2) {

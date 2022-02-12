@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
 import { db } from "..";
 import walletOptions from "../helpers/connectWallet";
@@ -23,24 +23,6 @@ const WalletProvider = (props: any) => {
   const [walletApp, setWalletApp] = useState(null);
   const [walletType, setWalletType] = useState("");
 
-  // const checkIfWalletConnected = async () => {
-  //   try {
-  //     const lastConnectedWalletType = window.localStorage.getItem(
-  //       "lastConnectedWalletType"
-  //     );
-  //     if (!lastConnectedWalletType) return;
-  //     const wallet = walletOptions.find(
-  //       (wallet) => wallet.name === lastConnectedWalletType
-  //     );
-  //     const walletConnected = await wallet?.connect();
-  //     setWalletAddress(walletConnected.publicKey.toString());
-  //     setWalletApp(walletConnected);
-  //     setWalletType(lastConnectedWalletType);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const disconnectWallet = async () => {
     const connectedWallet = walletOptions.find(
       (wallet) => wallet.name === walletType
@@ -62,21 +44,22 @@ const WalletProvider = (props: any) => {
     }: { name: string; whitelistLimit: number; collectionCode: string }
   ) => {
     const wallet = await connect();
-
-    const fetchQuery = query(
-      collection(db, "collections"),
-      where("collectionCode", "==", collectionCode.toUpperCase())
+    const fetchQuery = collection(
+      db,
+      "collections",
+      collectionCode.toUpperCase(),
+      "publicKeys"
     );
     const { docs } = await getDocs(fetchQuery);
 
-    if (docs.length === 0) {
-      await addDoc(collection(db, "collections"), {
-        name,
-        collectionCode: collectionCode.toUpperCase(),
-        publicKeys: [],
+    console.log(`WHITELISTED PEOPLE: ${docs.length}`);
+
+    if (docs?.length === 0) {
+      await setDoc(doc(db, "collections", collectionCode.toUpperCase()), {
+        publicKeys: null,
       });
     } else {
-      if (docs[0].data().publicKeys.length >= whitelistLimit) {
+      if (docs.length >= whitelistLimit) {
         alert("Maximum entries reached for whitelist. Better luck next time");
         return;
       }
@@ -87,14 +70,6 @@ const WalletProvider = (props: any) => {
     setWalletAddress(wallet.publicKey.toString());
     setWalletType(walletName);
   };
-
-  // useEffect(() => {
-  //   const onLoad = async () => {
-  //     await checkIfWalletConnected()
-  //   }
-  //   window.addEventListener("load", onLoad)
-  //   return () => window.removeEventListener("load", onLoad)
-  // }, [])
 
   return (
     <WalletContext.Provider
