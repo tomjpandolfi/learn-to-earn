@@ -1,0 +1,114 @@
+﻿[
+  {
+    "name": "Shadowy Super Coder",
+    "collectionCode": "SSCGG",
+    "whitelistLimit": 125
+  },
+  { "name": "MonkeDAO", "collectionCode": "MonkeD", "whitelistLimit": 150 },
+  { "name": "ThugDAO", "collectionCode": "Thug50", "whitelistLimit": 50 },
+  {
+    "name": "Degen Apes DAO",
+    "collectionCode": "DAA125",
+    "whitelistLimit": 150
+  },
+  { "name": "Rogue Sharks", "collectionCode": "Rogu60", "whitelistLimit": 60 },
+  { "name": "Solanauts", "collectionCode": "Naut25", "whitelistLimit": 25 },
+  {
+    "name": "JamboMamboLand",
+    "collectionCode": "Jamb40",
+    "whitelistLimit": 40
+  },
+  {
+    "name": "Solana Journey",
+    "collectionCode": "SSJs20",
+    "whitelistLimit": 20
+  },
+  { "name": "Xin Dragons", "collectionCode": "XinD30", "whitelistLimit": 30 },
+  { "name": "Voxel Monkes", "collectionCode": "Voxe10", "whitelistLimit": 10 },
+  { "name": "Night Racers", "collectionCode": "Racers", "whitelistLimit": 20 },
+  {
+    "name": "Stoned Ape Club",
+    "collectionCode": "ApeC75",
+    "whitelistLimit": 75
+  },
+  { "name": "Grape", "collectionCode": "Grap25", "whitelistLimit": 25 },
+  { "name": "Lifinity", "collectionCode": "Flares", "whitelistLimit": 125 },
+  { "name": "DeFi Pirates", "collectionCode": "Pirate", "whitelistLimit": 100 },
+  {
+    "name": "Boroyoku Dragonz",
+    "collectionCode": "Dragon",
+    "whitelistLimit": 30
+  },
+  { "name": "SOL Flowers", "collectionCode": "Flower", "whitelistLimit": 30 },
+  {
+    "name": "Bat City Underground",
+    "collectionCode": "Bats40",
+    "whitelistLimit": 40
+  },
+  { "name": "Exiled Apes", "collectionCode": "EApe30", "whitelistLimit": 30 },
+  { "name": "NootDAO", "collectionCode": "Noot88", "whitelistLimit": 88 },
+  { "name": "SolSunsets", "collectionCode": "Sunset", "whitelistLimit": 40 },
+  { "name": "McDegens", "collectionCode": "Mcdgns", "whitelistLimit": 10 },
+  { "name": "Jungle Cats", "collectionCode": "Cats40", "whitelistLimit": 40 },
+  { "name": "Rad Rugs", "collectionCode": "Rugs50", "whitelistLimit": 50 },
+  { "name": "Aurory", "collectionCode": "Aurory", "whitelistLimit": 60 },
+  {
+    "name": "FamousFoxFederation",
+    "collectionCode": "Foxs77",
+    "whitelistLimit": 77
+  },
+  { "name": "888anons", "collectionCode": "Anon20", "whitelistLimit": 40 },
+  { "name": "Belugies", "collectionCode": "Belu60", "whitelistLimit": 60 },
+  { "name": "MagicEden", "collectionCode": "Magic10", "whitelistLimit": 10 },
+  { "name": "Solvent", "collectionCode": "Solven", "whitelistLimit": 10 },
+  { "name": "Marinade", "collectionCode": "Marina", "whitelistLimit": 50 },
+  { "name": "Sollend", "collectionCode": "Solend", "whitelistLimit": 25 },
+  { "name": "Blackpool", "collectionCode": "BPT33", "whitelistLimit": 10 },
+  {
+    "name": "GoldPantherDAO",
+    "collectionCode": "Gold40",
+    "whitelistLimit": 40
+  },
+  { "name": "Botborgs", "collectionCode": "Borg75", "whitelistLimit": 75 },
+  { "name": "DinoKingz", "collectionCode": "Dino30", "whitelistLimit": 30 },
+  { "name": "Yawwww", "collectionCode": "Yaww75", "whitelistLimit": 75 },
+  { "name": "Mindfolk", "collectionCode": "Mind30", "whitelistLimit": 20 },
+  {
+    "name": "Catalina Whale Mixer",
+    "collectionCode": "Whales",
+    "whitelistLimit": 50
+  },
+  {
+    "name": "Baby Ape Social Club",
+    "collectionCode": "BASC50",
+    "whitelistLimit": 50
+  },
+  { "name": "Danerobz", "collectionCode": "Danes1", "whitelistLimit": 30 },
+  {
+    "name": "Cropper Finance",
+    "collectionCode": "CropFi",
+    "whitelistLimit": 10
+  },
+  { "name": "MonkeRejects", "collectionCode": "MonkeR", "whitelistLimit": 50 },
+  { "name": "SurgingBulls", "collectionCode": "Surgin", "whitelistLimit": 20 },
+  { "name": "AussieDAO", "collectionCode": "Aussie", "whitelistLimit": 10 },
+  { "name": "XenoBots", "collectionCode": "Xeno", "whitelistLimit": 100 },
+  { "name": "ArtPunks", "collectionCode": "ArtP50", "whitelistLimit": 50 },
+  { "name": "Squatch", "collectionCode": "Squa20", "whitelistLimit": 20 },
+  {
+    "name": "Meerkat Millionaires",
+    "collectionCode": "Meer30",
+    "whitelistLimit": 30
+  },
+  { "name": "Bloonsville", "collectionCode": "Bloo40", "whitelistLimit": 40 },
+  { "name": "Degencoinflip", "collectionCode": "Flip40", "whitelistLimit": 30 },
+  { "name": "ASAC", "collectionCode": "Asac25", "whitelistLimit": 25 },
+  {
+    "name": "Artificial Irrelevants",
+    "collectionCode": "Arir40",
+    "whitelistLimit": 40
+  },
+  { "name": "GomuGomuVerse", "collectionCode": "Gomu50", "whitelistLimit": 50 },
+  { "name": "Gaius", "collectionCode": "Gaius1", "whitelistLimit": 10 },
+  { "name": "CyberEyes", "collectionCode": "Eyes25", "whitelistLimit": 10 }
+]
