@@ -65,8 +65,7 @@ const QuizPage: React.FC<{
           )
         )
       );
-      console.log(docs);
-      setCurrentCollection(docs.length === 1 ? docs[0] : null);
+      setCurrentCollection(docs.length > 0 ? docs[0] : null);
     })();
   }, []);
 
@@ -84,24 +83,27 @@ const QuizPage: React.FC<{
 
   const addAddressToWhiteList = useCallback(async () => {
     try {
-      console.log("ADDING");
-      await setDoc(
-        doc(db, "collections", currentCollection!.id),
-        {
-          publicKeys: [
-            ...currentCollection!.data().publicKeys,
-            { address: walletAddress, timeStamp: Date.now() },
-          ],
-        },
-        { merge: true }
-      );
+      if (currentCollection) {
+        await setDoc(
+          doc(db, "collections", currentCollection!.id),
+          {
+            publicKeys: [
+              ...currentCollection!.data().publicKeys,
+              { address: walletAddress, timeStamp: Date.now() },
+            ],
+          },
+          { merge: true }
+        );
+      } else {
+        alert("Invalid Collection. Please refresh");
+      }
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-  }, []);
+  }, [currentCollection]);
 
   useEffect(() => {
-    if (currentCollection && submitted && score > questions.length / 2) {
+    if (submitted && score > questions.length / 2) {
       addAddressToWhiteList();
     }
   }, [submitted, addAddressToWhiteList, score, questions.length]);
