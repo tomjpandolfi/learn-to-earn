@@ -17,6 +17,7 @@ import {
   query,
   QueryDocumentSnapshot,
   setDoc,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { db } from "../..";
@@ -94,15 +95,11 @@ const QuizPage: React.FC<{
   const addAddressToWhiteList = useCallback(async () => {
     try {
       if (currentCollection) {
-        await setDoc(
+        console.log(currentData);
+        await updateDoc(
           doc(db, "collections", currentCollection!.id),
-          {
-            publicKeys: [
-              ...currentData,
-              { address: walletAddress, timeStamp: Date.now() },
-            ],
-          },
-          { merge: true }
+          "publicKeys",
+          [...currentData, { address: walletAddress, timestamp: Date.now() }]
         );
       } else {
         alert("Invalid Collection. Please refresh");
@@ -110,7 +107,7 @@ const QuizPage: React.FC<{
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-  }, [currentCollection]);
+  }, [currentCollection, currentData]);
 
   useEffect(() => {
     if (submitted && score > questions.length / 2) {
