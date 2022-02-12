@@ -8,12 +8,12 @@ import "./QuizPage.scss";
 import Confetti from "react-confetti";
 import { WalletContext } from "../../context/wallet";
 import {
-  addDoc,
   collection,
   doc,
   DocumentData,
-  documentId,
   getDocs,
+  onSnapshot,
+  onSnapshotsInSync,
   query,
   QueryDocumentSnapshot,
   setDoc,
@@ -48,6 +48,7 @@ const QuizPage: React.FC<{
   const questions: Question[] = useMemo(() => shuffleArray(QUESTIONS), []);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [submitted, setSubmitted] = useState(false);
+  const [currentData, setCurrentData] = useState<DocumentData[]>([]);
   const { walletAddress } = useContext(WalletContext);
 
   const [currentCollection, setCurrentCollection] =
@@ -69,6 +70,18 @@ const QuizPage: React.FC<{
     })();
   }, []);
 
+  useEffect(() => {
+    if (currentCollection) {
+      onSnapshot(doc(db, "collections", currentCollection.id), (doc) => {
+        console.log("NEW DATA", doc.data());
+        setCurrentData((currentData) => [
+          ...currentData,
+          doc.data()!.publicKeys,
+        ]);
+      });
+    }
+  }, [currentCollection]);
+
   const onNextClick = () => {
     setQuestionIndex((current) => current + 1);
     setAnswers((current) => [...current, selectedAnswer || emptyAnswer]);
@@ -88,7 +101,7 @@ const QuizPage: React.FC<{
           doc(db, "collections", currentCollection!.id),
           {
             publicKeys: [
-              ...currentCollection!.data().publicKeys,
+              ...currentData,
               { address: walletAddress, timeStamp: Date.now() },
             ],
           },
@@ -106,7 +119,7 @@ const QuizPage: React.FC<{
     if (submitted && score > questions.length / 2) {
       addAddressToWhiteList();
     }
-  }, [submitted, addAddressToWhiteList, score, questions.length]);
+  }, [submitted, score, questions.length]);
 
   return (
     <div className="quiz-page">
