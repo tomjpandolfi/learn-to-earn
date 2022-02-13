@@ -7,7 +7,12 @@ import { QUESTIONS } from "./questions";
 import "./QuizPage.scss";
 import Confetti from "react-confetti";
 import { WalletContext } from "../../context/wallet";
-import { addDoc, collection } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  DocumentData,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "../..";
 
 type Answer = {
@@ -37,8 +42,25 @@ const QuizPage: React.FC<{
   const questions: Question[] = useMemo(() => shuffleArray(QUESTIONS), []);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [submitted, setSubmitted] = useState(false);
+  const [currentData, setCurrentData] = useState<DocumentData[]>([]);
 
   const { walletAddress } = useContext(WalletContext);
+
+  useEffect(() => {
+    onSnapshot(
+      collection(
+        db,
+        "collections",
+        nftCollection.collectionCode.toUpperCase(),
+        "publicKeys"
+      ),
+      (result) => {
+        const data: DocumentData[] = [];
+        result.docs.forEach((doc) => data.push(doc.data()));
+        setCurrentData(data);
+      }
+    );
+  }, []);
 
   const onNextClick = () => {
     setQuestionIndex((current) => current + 1);
@@ -54,18 +76,20 @@ const QuizPage: React.FC<{
 
   const addAddressToWhiteList = useCallback(async () => {
     try {
-      await addDoc(
-        collection(
-          db,
-          "collections",
-          nftCollection.collectionCode.toUpperCase(),
-          "publicKeys"
-        ),
-        {
-          address: walletAddress,
-          timeStamp: Date.now(),
-        }
-      );
+      if (currentData.length < nftCollection.whitelistLimit) {
+        await addDoc(
+          collection(
+            db,
+            "collections",
+            nftCollection.collectionCode.toUpperCase(),
+            "publicKeys"
+          ),
+          {
+            address: walletAddress,
+            timeStamp: Date.now(),
+          }
+        );
+      }
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -82,9 +106,13 @@ const QuizPage: React.FC<{
       <div className="content">
         {submitted ? (
           <>
-            {score > questions.length / 2 && (
-              <Confetti width={window.innerWidth} height={window.innerHeight} />
-            )}
+            {currentData.length < nftCollection.whitelistLimit &&
+              score > questions.length / 2 && (
+                <Confetti
+                  width={window.innerWidth}
+                  height={window.innerHeight}
+                />
+              )}
             <TitleText className="head-text">Score</TitleText>
             <div className="score-container">
               <TitleText>
@@ -92,7 +120,8 @@ const QuizPage: React.FC<{
               </TitleText>
             </div>
             <BodyText>
-              {score > questions.length / 2
+              {currentData.length < nftCollection.whitelistLimit &&
+              score > questions.length / 2
                 ? "Congrats you passed the quiz. Keep an eye on our discord for the next round 👀"
                 : "Sorry! You do not qualify for the whitelist"}
             </BodyText>

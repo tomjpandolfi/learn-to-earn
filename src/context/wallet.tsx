@@ -38,8 +38,8 @@ const WalletProvider = (props: any) => {
     walletName: string,
     connect: Function,
     {
-      collectionCode,
       name,
+      collectionCode,
       whitelistLimit,
     }: { name: string; whitelistLimit: number; collectionCode: string }
   ) => {
@@ -56,7 +56,8 @@ const WalletProvider = (props: any) => {
 
     if (docs?.length === 0) {
       await setDoc(doc(db, "collections", collectionCode.toUpperCase()), {
-        publicKeys: null,
+        collectionCode: collectionCode.toUpperCase(),
+        name,
       });
     } else {
       if (docs.length >= whitelistLimit) {
