@@ -93,7 +93,7 @@ const QuizPage: React.FC<{
     } catch (e) {
       console.error("Error adding document: ", e);
     }
-  }, []);
+  }, [currentData, walletAddress]);
 
   useEffect(() => {
     if (submitted && score > questions.length / 2) {
